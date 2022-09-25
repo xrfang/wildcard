@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"github.com/xrfang/wildcard"
 )
+
 func main() {
 	p1 := wildcard.Pattern("hello*")
-    p2 := wildcard.Pattern("hello*!")
+	p2 := wildcard.Pattern("hello*!")
 	p3 := wildcard.Pattern("?hello")
 	s1 := "hello world"
 	s2 := "hello world!"
@@ -20,6 +21,8 @@ func main() {
 	fmt.Printf("%q matches %q: %v\n", p3, s1, p3.Match(s1))
 	fmt.Printf("%q matches %q: %v\n", p3, s2, p3.Match(s2))
 	fmt.Printf("%q matches %q: %v\n", p3, s3, p3.Match(s3))
+	fmt.Printf("%q lowercase match 'HELLO world': %v\n", p1, p1.LowerCaseMatch("HELLO world"))
+	fmt.Printf("%q uppercase match 'hello WORLD': %v\n", p1, p1.UpperCaseMatch("hello WORLD"))
 	if p3.Match("hello") {
 		fmt.Println("'?' matches zero character")
 	} else {

@@ -1,10 +1,13 @@
 package wildcard
 
-import "unicode/utf8"
+import (
+	"strings"
+	"unicode/utf8"
+)
 
 type Pattern string
 
-func (p Pattern) Match(subject string) (matched bool) {
+func (p Pattern) Match(subject string) bool {
 next:
 	for len(p) > 0 {
 		var star bool
@@ -39,6 +42,14 @@ next:
 		return false
 	}
 	return len(subject) == 0
+}
+
+func (p Pattern) LowerCaseMatch(subject string) bool {
+	return p.Match(strings.ToLower(subject))
+}
+
+func (p Pattern) UpperCaseMatch(subject string) bool {
+	return p.Match(strings.ToUpper(subject))
 }
 
 // scanChunk gets the next segment of pattern, which is a non-star
